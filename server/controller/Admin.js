@@ -10,20 +10,46 @@ const User = require("../models/User");
 const TeamApplication = require("../models/TeamApplication");
 const Trainee = require("../models/Trainee");
 const Note = require("../models/Note");
+const TeamWork = require("../models/TeamWork");
 const Project = require("../models/Project");
 const fs = require('fs-extra');
 
+const GetTeamWorks = async (req, res) => {
+  try {
+    const teamworks = await TeamWork.find();
+    res.status(200).json(teamworks);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
 
+const PostTeamWork = async (req, res) => {
+  try {
+    const teamWork = req.body.addTeamWork;
+    const newTeamWork = await new TeamWork(teamWork);
+    await newTeamWork.save();
+    res.status(200).json(newTeamWork);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
 
-const { Storage } = require("@google-cloud/storage");
-
-const storage = new Storage({
-  projectId: "uploadimage-409200",
-  keyFilename: "./uploadimage.json",
-});
-
-const bucketName = "sistemyonetimi";
-
+const DeleteTeamWork = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedTeamWork = await TeamWork.deleteOne({ _id: id });
+    if(deletedTeamWork){
+      res.status(200).json({ message: "Takım çalışması görseli silindi. "});
+    }else {
+      res.status(404).json({ message: "Takım çalışması görseli bulunamadı. "});
+    }
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+}
 
 const PostService = async(req, res) => {
     const { addService } = req.body;
@@ -394,8 +420,8 @@ const UploadImage = async (req, res) => {
 
 };
 
-const UploadImageGoogle = async (req, res) => {
-  console.log(req.file);
+
+const uploadImageLocal = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: "Dosya sağlanmadı" });
@@ -404,36 +430,14 @@ const UploadImageGoogle = async (req, res) => {
     const file = req.file;
     const originalname = file.originalname;
     const uniqueSuffix = uuidv4();
-    const fileName =
-      path.parse(originalname).name +
-      "-" +
-      uniqueSuffix +
-      path.extname(originalname);
+    const fileName = `${path.parse(originalname).name}-${uniqueSuffix}${path.extname(originalname)}`;
 
-    // Google Cloud Storage'a yüklenmeden önce resmi buffer olarak al
-    const imageBuffer = file.buffer;
+    // Resmi belirli bir klasöre kaydet (örneğin, sunucunun kök dizinindeki "img" klasörüne)
+    const uploadPath = path.join(__dirname, '..', 'img', fileName);
+    fs.writeFileSync(uploadPath, file.buffer);
 
-    // WebP formatına dönüştürmeden önce resmi Google Cloud Storage'a yükle
-    const blob = storage.bucket(bucketName).file(fileName);
-    const blobStream = blob.createWriteStream({
-      resumable: false,
-      metadata: {
-        contentType: file.mimetype,
-      },
-    });
-
-    blobStream.on("error", (err) => {
-      console.error(err);
-      res.status(500).json({ message: "Dosya yükleme hatası" });
-    });
-
-    blobStream.on("finish", () => {
-      const publicUrl = `https://storage.googleapis.com/${bucketName}/${blob.name}`;
-      res.status(200).json({ imgUrl: publicUrl });
-    });
-
-    // Resmi yükle
-    blobStream.end(imageBuffer);
+    const publicUrl = `https://apiiste.mithatsarsu.com/img/${fileName}`; // Resmin erişim URL'si
+    res.status(200).json({ imgUrl: publicUrl });
 
   } catch (error) {
     console.error(error);
@@ -444,6 +448,9 @@ const UploadImageGoogle = async (req, res) => {
 
 
 module.exports = {
+  GetTeamWorks,
+  PostTeamWork,
+  DeleteTeamWork,
   PostProject,
   DeleteProject,
   UploadImage,
@@ -469,27 +476,5 @@ module.exports = {
   GetCounts,
   SendNote,
   GetNotes,
-  UploadImageGoogle
+  uploadImageLocal
 };
-
-// const User = require('../models/User');
-
-// const getUserInfo = async(req, res) => {
-//     const userId = req.params.id;
-//     try {
-//         const userInfo = await User.findOne({_id: userId});
-//         res.status(200).json(userInfo);
-//     } catch (error) {
-//         res.status(404).json({message: "Kullanıcı bulunamadı veya bir hata oluştu!"});
-//         console.log(error);
-//     }
-// }
-
-// const getAllUsers = async (req, res) => {
-//     try {
-//         const users = await User.find();
-//         res.status(200).json(users);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }

@@ -95,7 +95,7 @@ const Navbar = () => {
             >
               <img
                 className="h-14 w-14 object-contain"
-                src="/assets/iste.png"
+                src="/assets/iste.jpeg"
                 alt="logo"
               />
               <span className="font-bold">HEP<span className="text-[#CD2147]">İSTE</span></span>
@@ -129,6 +129,13 @@ const Navbar = () => {
               Çalışma Alanlarımız
             </NavLink>
             <NavLink
+              to={"/team-works"}
+              onClick={scrollToProjects}
+              className="transition max-md:bg-[#CD2147] py-3 underline-animation max-md:border-b max-md:w-full max-md:text-center mr-4 md:mr-8 mb-2 md:mb-0"
+            >
+              Takım Çalışmalarımız
+            </NavLink>
+            <NavLink
               to={"/team-application"}
               onClick={scrollToProjects}
               className="transition max-md:bg-[#CD2147] py-3 underline-animation max-md:border-b max-md:w-full max-md:text-center mr-4 md:mr-8 mb-2 md:mb-0"
@@ -148,22 +155,6 @@ const Navbar = () => {
             >
               İletişim
             </NavLink>
-            {user ? (
-              <NavLink
-                to="/admin"
-                className="underline-animation mr-4 md:mr-8 mb-2 md:mb-0"
-              >
-                Admin
-              </NavLink>
-            ) : null}
-            {user ? (
-              <button
-                onClick={handleLogout}
-                className="underline-animation mr-4 md:mr-8 mb-2 md:mb-0"
-              >
-                Çıkış Yap
-              </button>
-            ) : null}
           </nav>
         </div>
       </div>

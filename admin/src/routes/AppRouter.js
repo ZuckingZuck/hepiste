@@ -12,6 +12,7 @@ import AdminPosts from "../pages/AdminPosts";
 import AdminUsers from "../pages/AdminUsers";
 import AdminLogin from "../pages/AdminLogin";
 import NotFound from "../pages/NotFound";
+import AdminTeamWork from "../pages/AdminTeamWorks";
 
 const AppRouter = () => {
   const user = useSelector((state) => state.user.user);
@@ -33,6 +34,10 @@ const AppRouter = () => {
       <Route
         path="/contacts"
         element={user ? <AdminContacts /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/team-works"
+        element={user ? <AdminTeamWork /> : <Navigate to="/login" />}
       />
       <Route
         path="/team-applications"

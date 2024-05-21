@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require("multer")
-const { UploadImage, PostService, UpdateService, DeleteService, PostBlog, UpdateBlog, DeleteBlog, PostSocial, UpdateSocial, DeleteSocial, PostFaq, UpdateFaq, DeleteFaq, GetContacts, GetUsers, DeleteUser, RoleBlogger, RoleAdmin, GetTeamApplications, GetTraineeApplications, GetCounts, SendNote, GetNotes, UploadImageGoogle, PostProject, DeleteProject } = require('../controller/Admin');
+const { UploadImage, PostService, UpdateService, DeleteService, PostBlog, UpdateBlog, DeleteBlog, PostSocial, UpdateSocial, DeleteSocial, PostFaq, UpdateFaq, DeleteFaq, GetContacts, GetUsers, DeleteUser, RoleBlogger, RoleAdmin, GetTeamApplications, GetTraineeApplications, GetCounts, SendNote, GetNotes, UploadImageGoogle, PostProject, DeleteProject, uploadImageLocal, PostTeamWork, DeleteTeamWork, GetTeamWorks } = require('../controller/Admin');
 const { createUser } = require('../controller/Auth');
 const requireAuth = require('../middleware/requireAuth');
 const isSuperAdmin = require('../middleware/isSuperAdmin');
@@ -20,7 +20,8 @@ router.use(requireAuth);
 
 //blogger yetkileri
 router.use(isBlogger);
-router.post("/upload", multerMiddleware.single("name"), UploadImageGoogle);
+router.get("/teamwork", GetTeamWorks);
+router.post("/upload", multerMiddleware.single("name"), uploadImageLocal);
 router.post('/blog', PostBlog);
 router.get('/counts', GetCounts);
 router.post('/sendnote', SendNote);
@@ -30,6 +31,8 @@ router.get('/getnotes', GetNotes);
 
 //AdminYetkileri
 router.use(isAdmin)
+router.post("/teamwork", PostTeamWork);
+router.delete("/teamwork/:id", DeleteTeamWork);
 router.post('/project', PostProject);
 router.delete('/project/:id', DeleteProject);
 

@@ -18,7 +18,7 @@ const AdminNavbar = () => {
 
   return (
     <nav
-      className={`bg-gray-800 w-[250px] h-screen overflow-hidden box-border flex flex-col`}
+      className={`bg-gray-800 w-[250px] min-h-screen overflow-hidden box-border flex flex-col`}
     >
       <link
         rel="stylesheet"
@@ -63,6 +63,15 @@ const AdminNavbar = () => {
                 onClick={handleMenuToggle}
               >
                 <i className="fa-solid fa-diagram-project"></i> Projeler
+              </NavLink>
+            </li>
+            <li className="mb-4">
+              <NavLink
+                to="/team-works"
+                className="text-white"
+                onClick={handleMenuToggle}
+              >
+                <i className="fa-solid fa-user-plus"></i> Takım Çalışmaları
               </NavLink>
             </li>
             <li className="mb-4">

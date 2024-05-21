@@ -6,6 +6,7 @@ const Contact = require("../models/Contact");
 const TeamApplication = require("../models/TeamApplication");
 const TraineeApplication = require("../models/Trainee");
 const Project = require("../models/Project");
+const TeamWork = require("../models/TeamWork");
 
 const GetServices = async (req, res) => {
   try {
@@ -161,7 +162,18 @@ const PostTraineeApplication = async (req, res) => {
   }
 };
 
+const GetTeamWorks = async (req, res) => {
+  try {
+    const teamworks = await TeamWork.find();
+    res.status(200).json(teamworks);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
 module.exports = {
+  GetTeamWorks,
   GetProjects,
   GetProjectsByCategory,
   GetServices,

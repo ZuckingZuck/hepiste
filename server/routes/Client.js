@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { GetServices, GetServiceBySlugUrl, GetBlogs, GetBlogBySlug, GetSocials, GetFaqs, PostContact, PostTeamApplication, PostTraineeApplication, GetProjects } = require('../controller/Client');
+const { GetTeamWorks } = require('../controller/Admin');
 
 //service eylemleri
 
+router.get("/teamworks", GetTeamWorks);
 router.get('/project', GetProjects);
 
 router.get('/service', GetServices);
