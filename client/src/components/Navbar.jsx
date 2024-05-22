@@ -129,6 +129,13 @@ const Navbar = () => {
               Çalışma Alanlarımız
             </NavLink>
             <NavLink
+              to={"/team"}
+              onClick={scrollToProjects}
+              className="transition max-md:bg-[#CD2147] py-3 underline-animation max-md:border-b max-md:w-full max-md:text-center mr-4 md:mr-8 mb-2 md:mb-0"
+            >
+              Yönetim ve Organizasyon
+            </NavLink>
+            <NavLink
               to={"/team-works"}
               onClick={scrollToProjects}
               className="transition max-md:bg-[#CD2147] py-3 underline-animation max-md:border-b max-md:w-full max-md:text-center mr-4 md:mr-8 mb-2 md:mb-0"

@@ -48,31 +48,6 @@ const ContactForm = () => {
 
   return (
     <div>
-      <div className="bg-gray-400 bg-opacity-60 p-8 rounded-lg shadow-md container mx-auto mt-10 mb-10">
-        <div className="text-[#cd2147]">
-          <h1 className="text-xl font-bold text-center">İletişim Bilgileri</h1>
-        </div>
-        <div className="flex flex-col gap-5 text-center mt-5">
-          <div>
-            <h1 className="font-bold">İSKENDERUN TEKNİK ÜNİVERSİTESİ (İSTE)</h1>
-            <p>Santral : 0.326 613 56 00 – 613 70 80 – 617 82 76</p>
-            <p>Fax : 0.326 613 56 13</p>
-            <p>Posta Adresi: İskenderun Teknik Üniversitesi (İSTE) Rektörlüğü, Merkez Kampüs, 31200, İskenderun, Hatay, Türkiye</p>
-          </div>
-          <div>
-            <h1 className="font-bold">REKTÖRLÜK</h1>
-            <p>Santral :0.326 613 56 00</p>
-            <p>Fax : 0.326 613 56 13</p>
-            <p>Posta Adresi: İskenderun Teknik Üniversitesi (İSTE) Rektörlüğü, Merkez Kampüs, 31200, İskenderun, Hatay, Türkiye</p>
-          </div>
-          <div>
-            <h1 className="font-bold">Öğrenci İşleri Daire Başkanlığı</h1>
-            <p>Santral : 0.326 613 56 00 – 613 70 80 – 617 82 76</p>
-            <p>Fax : 0.326 613 56 13</p>
-            <p>Posta Adresi: İskenderun Teknik Üniversitesi (İSTE) Rektörlüğü, Merkez Kampüs, 31200, İskenderun, Hatay, Türkiye</p>
-          </div>
-        </div>
-      </div>
       <div className="contact bg-gray-400 bg-opacity-60 p-8 rounded-lg shadow-md container mx-auto mt-10 mb-10">
         <div className="head text-center">
           <h2 className="text-2xl font-bold mb-2">İletişim Formu</h2>

@@ -4,7 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9090;
 
 const adminRouter = require('./routes/Admin');
 const clientRouter = require('./routes/Client');

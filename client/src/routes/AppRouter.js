@@ -11,6 +11,7 @@ import ApplicationForm from "../pages/ApplicationForm";
 import NotFound from "../pages/NotFound";
 import Redirect from "./Redirect";
 import TeamWorks from "../pages/TeamWorks";
+import Team from "../pages/Team";
 
 const AppRouter = () => {
   const user = useSelector((state) => state.user.user);
@@ -23,6 +24,7 @@ const AppRouter = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/p/:slugUrl" element={<PostDetail />} />
       <Route path="/s/:slugUrl" element={<ServiceDetail />} />
+      <Route path="/team" element={<Team />} />
       <Route path="/team-works" element={<TeamWorks />} />
       <Route path="/team-application" element={<ApplicationForm />} />
       <Route path="/admin" element={<Redirect />} />
